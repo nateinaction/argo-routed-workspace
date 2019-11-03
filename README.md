@@ -1,4 +1,6 @@
-# network-infrastructure
+# argo-routed-workspace
+
+Use Cloudflare argo to create your own private SSH-able workspace in AWS.
 
 ### Setup
 - Verify Docker and brew installed locally
