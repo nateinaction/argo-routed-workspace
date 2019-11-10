@@ -3,7 +3,7 @@
     {
       "region": "us-east-1",
       "type": "amazon-ebs",
-      "ami_name": "nategay-aws-ubuntu-18.04-{{timestamp}}",
+      "ami_name": "nategay-argo-aws-ubuntu-18.04-{{timestamp}}",
       "instance_type": "t3.nano",
       "ssh_username": "ubuntu",
       "source_ami_filter": {
