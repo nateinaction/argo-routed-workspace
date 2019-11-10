@@ -1,0 +1,33 @@
+{
+  "builders": [
+    {
+      "region": "us-east-1",
+      "type": "amazon-ebs",
+      "ami_name": "nategay-aws-ubuntu-18.04-{{timestamp}}",
+      "instance_type": "t3.nano",
+      "ssh_username": "ubuntu",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline":[
+        "sudo add-apt-repository \"deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse\"",
+        "sudo apt-get update",
+        "sudo apt-get install -y awscli build-essential ca-certificates curl",
+        "curl 'https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb' -o cloudflared.deb",
+        "sudo dpkg -i cloudflared.deb",
+        "rm -rf cloudflared.deb"
+      ]
+    }
+  ]
+}

@@ -1,15 +1,10 @@
 data "aws_ami" "ubuntu" {
-  owners      = ["099720109477"]
+  owners      = ["self"]
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-*"]
-  }
-
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
+    values = ["nategay-aws-ubuntu-18.04*"]
   }
 }
 
@@ -17,6 +12,7 @@ data "template_file" "argo_protected_userdata" {
   template = file("${path.module}/files/userdata.template.sh")
   vars = {
     argo_secrets_bucket = var.argo_secrets_bucket
+    domain              = var.cloudflare_domain
   }
 }
 
@@ -45,23 +41,3 @@ resource "aws_instance" "workspace" {
   }
 }
 
-//resource "aws_ebs_volume" "workspace" {
-//  count = 1 # always exist
-//
-//  availability_zone = aws_subnet.public[count.index].availability_zone
-//  size              = 20
-//  encrypted         = true
-//
-//  tags = {
-//    Name = var.project_name
-//  }
-//}
-//
-//resource "aws_volume_attachment" "ebs_att" {
-//  count = var.workspace_enabled ? 1 : 0
-//
-//  device_name  = "/dev/sdh"
-//  volume_id    = aws_ebs_volume.workspace[count.index].id
-//  instance_id  = aws_instance.workspace[count.index].id
-//  skip_destroy = true
-//}

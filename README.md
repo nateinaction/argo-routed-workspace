@@ -1,6 +1,6 @@
 # argo-routed-workspace
 
-Use Cloudflare argo to create your own private SSH-able workspace in AWS.
+Use Cloudflare argo to create your own private SSH-able workspace in AWS. The workspace lives in an AWS VPC with no open ingress ingress rules.
 
 ### Setup
 - Verify Docker and brew installed locally

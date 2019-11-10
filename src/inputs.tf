@@ -20,15 +20,6 @@ variable "workspace_enabled" {
 variable "argo_secrets_bucket" {}
 
 // Cloudflare
-variable "cloudflare_email" {
-  description = "Email address for the Cloudflare account"
-}
-variable "cloudflare_api_token" {
-  description = "Limited scope Cloudflare API token"
-}
-variable "cloudflare_account_id" {
-  description = "Cloudflare Account ID"
-}
-variable "cloudflare_zone_id" {
-  description = "Zone ID for the domain managed by Cloudflare"
+variable "cloudflare_domain" {
+  description = "Domain to be used by the Cloudflare argo tunnel"
 }
